@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+</style>
+<script src="//cdn.webrtc-experiment.com/RTCMultiConnection.js"> </script>
+<script src="https://cdn.webrtc-experiment.com/rmc3.min.js"></script>
+<script src="https://cdn.webrtc-experiment.com:443/rmc3.fbr.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<h1>Guest</h1>
+
+<script>
+
+	var connection = new RTCMultiConnection();
+	
+    connection.socketURL = '/';
+
+	connection.enableFileSharing = true; // by default, it is "false".
+
+	connection.session = {
+		audio: false,
+		video: true,
+		data: true
+	};
+
+	connection.sdpConstraints.mandatory = {
+		OfferToReceiveAudio: true,
+		OfferToReceiveVideo: true
+	};
+
+	if(!connection.socket) connection.connectSocket();
+
+	connection.userid = "2345";
+	connection.extra.username = "Guest2345";
+	
+	connection.join('admin-room-id', function() {
+		connection.socket.emit('commmon-among-all-pages', {
+			userid: connection.userid,
+			extra: connection.extra,
+			roomid: 'admin-room-id'
+		});
+	});
+
+</script>
+</body>
+</html>

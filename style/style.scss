@@ -1,0 +1,527 @@
+/* File style.scss */
+
+
+
+/* colors (many are shades of grey) */
+
+$myrobot-color:                   hsl(0,   100%, 50%);
+
+$create-channel-color:            hsl(181, 100%, 41%);
+$create-channel-hover-color:      hsl(181, 100%, 30%);
+$create-channel-active-color:     hsl(181, 100%, 20%);
+
+$create-channel-bg-color:         hsl(181, 100%, 90%);
+
+$main-padding-color:              hsl(0, 0, 97%);
+$panel-color:                     hsl(0, 0, 97%);
+$long-description-bg-color:       hsl(0, 0, 80%);
+
+$tag-line-color:                  hsl(0, 0, 20%);
+$how-it-works-color:              hsl(0, 0, 40%);
+
+$channel-controls-bar-color:      hsl(0, 0, 75%);
+
+$public-chatbox-title-bar-color:  hsl(0, 0, 90%);
+$private-chatbox-title-bar-color: hsl(0, 0, 75%);
+$private-chatbox-color:           hsl(0, 0, 90%);
+$im-controls-bar-color:           hsl(0, 0, 90%);
+
+$menu-item-color:                 hsl(0, 0, 97%);
+$menu-item-hover-color:           hsl(0, 0, 75%);
+
+$call-notifier-color:             hsl(0, 0, 75%);
+$call-notifier-icons-color:       hsl(0, 0, 97%);
+
+$favorites-hover-color:           hsl(0, 0, 90%);
+$favorites-action-color:          hsl(0, 0, 97%);
+$favorites-selected-color:        hsl(0, 0, 75%);
+
+$channel-title-bg-color:          hsl(0, 0, 90%);
+$channel-title-color:             hsl(181, 100%, 30%);
+$channel-name-color:              hsl(181, 100%, 30%);
+$channel-border-color:            hsl(0, 0, 80%);
+
+$steering-button-hover-color:     hsl(0, 0, 90%);
+$steering-button-active-color:    hsl(90, 100%, 35%);
+
+$photo-icons-bg-color:            hsla(0, 0, 100%, 0.5);
+$caption-bg-color:                hsla(0, 0, 25%, 0.5);
+
+$modal-overlay-bg-color:          hsla(0, 0, 0, 0.6);
+
+$button-color:                    hsl(0,   100%, 50%);
+$button-hover-color:              hsl(0,   100%, 40%);
+$button-active-color:             hsl(0,   100%, 30%);
+
+/* from Gmail web interface */
+$ui-message-color:                hsl(0,   0, 13%);
+$ui-message-bg-color:             hsl(48, 83, 86%);
+$ui-message-border-color:         hsl(39, 81, 68%);
+
+$showcase-bg-color:               hsl(0,   0, 75%);
+
+
+
+/* sizes */
+
+$chatbox-width: 425px;
+
+$thumbnail-width: 160px;
+$thumbnail-height: $thumbnail-width * 3/4;
+ 
+$channel-thumbnail-width: 80px;
+$channel-thumbnail-height: $channel-thumbnail-width * 3/4;
+ 
+$channel-photo-width: 180px;
+$channel-photo-height: 180px * 3/4;
+
+$channel-video-width: 368px;
+$channel-video-height: $channel-video-width * 9/16;
+
+$control-icon-height: 40px;
+
+$pan-tilt-nib-width: 15px;
+$pan-tilt-nib-height: 15px;
+$zoom-icon-height: 20px;
+
+/* ?? tweaked to make channel thumbnails wrap nicely */
+$showcase-box-height: 455px;
+
+
+
+/* selectors */
+
+$streaming-controls: ".hang-up, .audio-enabled, .video-enabled";
+$ptz-controls: ".pan-tilt-box, .zoom-box, .reset-ptz";
+
+
+
+/* @mixins */
+
+/* responsive elements */
+
+@mixin remote-video-width($extra: 0)
+{
+ @media (min-width: 1294px)
+ {
+  width: 848px + $extra;
+ }
+ @media (max-width: 1293px)
+ {
+  width: 640px + $extra;
+ }
+}
+
+
+
+@mixin remote-video-height($extra: 0, $fraction: 1.0)
+{
+ @media (min-width: 1294px)
+ {
+  height: (848px * 9/16 * $fraction) + $extra;
+ }
+ @media (max-width: 1293px)
+ {
+  height: (640px * 9/16 * $fraction) + $extra;
+ }
+}
+
+
+
+@mixin search-results-nav-box-display
+{
+ @media (max-width: 1250px)
+ {
+  display: none;
+ }
+}
+
+
+
+/* other @mixins */
+
+@mixin base-font
+{
+ font-family: "Open Sans";
+ font-size: 13px;
+}
+
+
+
+@mixin hr-separator($width: 80%)
+{
+ hr
+ {
+  width: $width;
+  border-style: solid none none none;
+  color: grey;
+ }
+}
+
+
+
+@mixin name-width
+{
+ min-width: 12ch;
+ max-width: 12ch;
+}
+ 
+
+
+@mixin truncate
+{
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+
+
+
+@mixin title-icon-and-text
+{
+ .title
+ {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 1.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  align-items: center;
+
+  img
+  {
+   height: 1em;
+   margin-right: 0.25em;
+  }
+ }
+}
+
+ 
+
+/* search-button - magnifier icon shared by _home and _banner */
+@mixin search-button ($space)
+{
+ .search-button
+ {
+  height: 2em;
+  width: 2em;
+  margin-top: 2px;
+  margin-left: $space;
+
+  &:hover
+     {
+      background-image: url(/images/ios-search-bold.svg);
+      background-size: 2em;
+      background-repeat: no-repeat;
+     }
+ }
+}
+
+
+
+@mixin channel-box-common
+{
+ margin: 0.5em;
+ border: solid $channel-border-color 2px;
+ position: relative;
+
+ &:hover { border: solid black 2px; }
+
+ a
+ {
+  text-decoration: none;
+  color: black;
+ }
+
+ .channel-info
+ {
+  width: 100%;
+ }
+
+ img
+ {
+  min-width: $thumbnail-width;
+  max-width: $thumbnail-width; 
+  min-height: $thumbnail-height;
+  max-height: $thumbnail-height;
+  object-fit: contain;
+  background-color: black;
+ }
+  
+ .channel-live-disk
+ {
+  @include live-disk (20px);
+  position: absolute;
+  top: 5px;
+ }
+
+ .title
+ {
+  min-height: 1.1em;
+  margin-left: 3px;
+  @include truncate;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: $channel-title-color;
+ }
+
+ .name
+ {
+  min-height: 1em;
+  margin-left: 3px;
+  @include truncate;
+  color: $channel-name-color;
+ }
+
+ .description
+ {
+  min-height: 1em;
+  margin-left: 3px;
+ }
+ 
+ .title-and-live-sign
+ {
+  justify-content: space-between;
+  margin-right: 3px;
+  width: 100%;
+    
+  .channel-live-sign.not-live
+  {
+   display: none;
+  }
+ }
+}
+
+
+
+/* ui-message-box - shared by "System Notifications" and ui-message */
+@mixin ui-message-box
+{
+ padding-left: 1em;
+ padding-right: 1em;
+
+ margin: auto;
+ width: -webkit-max-content;
+
+ color: $ui-message-color;
+ font-weight: bold;
+ background-color: $ui-message-bg-color;
+ border: solid $ui-message-border-color 2px;
+ border-radius: 3px;
+}
+ 
+
+
+/* animation */
+
+@keyframes throb
+{
+ 0%   { opacity: 1.0; }
+ 50%  { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+}
+
+
+
+/* body context (global) */
+body
+{
+ @include base-font;
+ -webkit-user-select: none;
+
+ img { -webkit-user-drag: none; }
+}
+
+
+/* override user agent stylesheet */
+input,
+button
+{
+ @include base-font;
+}
+
+
+
+/* ?? maybe add .page class */
+
+#home-page,
+#view-channel-page,
+#manage-channel-page
+ {
+  
+  /* To get the desired Z stacking (animated dropdown menus in front),
+  establish the 3D context here, in a parent div.  However, to
+  preserve fixed position (relative to viewport) for messages, this
+  can't be applied to body.  Search "css perspective position
+  fixed". */
+  
+  -webkit-perspective: 5000px;
+ }
+
+
+
+/* ?? links */
+.api-link
+{
+ text-decoration: none;
+ color: black;
+}
+
+
+
+.channel-live-sign,
+.channel-telepresence-sign
+{
+ font-weight: 800;
+ color: $myrobot-color;
+ font-size: 1.1em;
+ margin-right: 3px;
+}
+
+ 
+
+@mixin live-disk ($size)
+{
+ width: $size;
+ height: $size;
+ box-sizing: border-box;
+ border: solid black 1px;
+ border-radius: $size / 2;
+ background-color: $myrobot-color;
+}
+
+
+
+/* ?? .content-box - maybe move to specified pages */
+
+#home-page,
+#manage-channel-page
+{
+ > .content-box
+ {
+  align-items: center;
+  width: 100%;
+ }
+}
+
+
+
+.links-box
+{
+ height: 50px;
+}
+
+
+
+.channel-social-media
+{
+ width: 100%;
+ 
+ @include title-icon-and-text;
+ 
+ .title
+ {
+  margin-top: 0;
+ }
+}
+
+ 
+
+.social-box
+ {
+  img
+  {
+   height: $control-icon-height;
+   margin: 1em;
+  }
+}
+
+
+
+input[type=submit],
+button
+ {
+  color: white;
+  background-color: $button-color;
+  width: -webkit-max-content;
+  padding: 0.5em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0px 1px hsl(0, 0, 80%);
+
+  &:focus
+     {
+      outline-style: none;
+     }
+  
+  &:hover
+     {
+      background-color: $button-hover-color;
+     }
+  
+  &:active
+     {
+      background-color: $button-active-color;
+      box-shadow: inset 0 0 2px 1px hsl(0, 0, 80%);
+     }
+ }
+
+
+
+.showcase-box
+{
+ font-size: 3em;
+ justify-content: center;
+ box-sizing: border-box;
+ border: solid 5px;
+ background-color: $showcase-bg-color;
+
+ .static-ad,
+ .promo-box
+  {
+   align-items: center;
+   justify-content: center;
+  }
+}
+
+
+
+/* customized substitute for title attribute tooltips */
+div[data-title]
+{
+ position: relative;
+
+ &:hover::after
+           {
+            content: attr(data-title);
+            font-size: 0.9rem;
+            font-weight: normal;
+            position: absolute;
+            width: -webkit-max-content;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            left: 0.5rem;
+            top: 2.0rem;
+            border: solid grey 1px;
+            background-color: #ffffcc;
+            z-index: 1;
+           }
+}
+
+
+
+/* imports */
+@import "dropdown-menu.scss";
+@import "banner.scss";
+@import "login-sign-up.scss";
+@import "home.scss";
+@import "chatbox.scss";
+@import "channel-media.scss";
+@import "view-channel.scss";
+@import "manage-channel.scss";
+@import "contact-info.scss";
+@import "favorites.scss";
+@import "ptz-controls.scss";
+
+
+

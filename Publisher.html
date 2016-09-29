@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Publisher Page</title>
+	<script src="//cdn.webrtc-experiment.com/RTCMultiConnection.js"> </script>
+	<script src="https://cdn.webrtc-experiment.com/rmc3.min.js"></script>
+	<script src="https://cdn.webrtc-experiment.com:443/rmc3.fbr.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+</head>
+<body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 12pt;color: #333;">
+<!-- 12961266234170220 -->
+<table width="95%" align="center">
+	<tr>
+		<td colspan=10 style="background-color:red;color:white;margin-top:20px;">
+			<br>
+			<h1 align="center"><font color=whitesmoke>Big Search Engine like Yelp or YP.com</font></h1>
+			<h2 align="center"><font color=whitesmoke>Your Search Results (lawyers & kittens)</font></h1>
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table border=0 class="ypTable">
+				<tr>
+					<td width="10%">
+						<img src="images/kitten-1.jpg" width="100px" height="100px">
+					</td>
+					<td width="40%" style="padding-left:10px">
+						Kitties Are Cute<br>
+						(Reviews)<br>
+						Kittens<br>
+					</td>
+					<td width="20%">
+						North Beach<br><br>
+						123 Cat Alley<br>
+						San Francisco, CA  94108<br>
+						(510) 922-1031<br>
+					</td>
+					<td align="right" width="250px">
+						<div class="myRobotDiv" id="div_kitty"></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table border=0 class="ypTable">
+				<tr>
+					<td width="10%">
+						<img src="images/business_1.jpeg" width="100px" height="100px">
+					</td>
+					<td width="40%" style="padding-left:10px">
+						Meakins Law<br>
+						(Reviews)<br>
+						Divorce & Family Law<br>
+					</td>
+					<td width="20%">
+						SoMa<br><br>
+						445 Bush St.<br>
+						San Francisco, CA  94108<br>
+						(510) 922-1031<br>
+					</td>
+					<td align="right" width="250px">
+						<div class="myRobotDiv" id="div_1234"></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style="margin-left:20px;padding-bottom:20px;">
+			Meakins Law is a different kind of family law firm, representing clients from Berkeley, Oakland, the East Bay, and San Francisco.  Our attorneys aim to guide people through their most .. read more
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<table class="ypTable">
+				<tr>
+					<td width="10%">
+						<img src="images/business_2.jpeg" width="100px" height="100px">
+					</td>
+					<td width="40%" style="padding-left:10px">
+						Bennett M. Cohen, Attorney At Law<br>
+						(Reviews)<br>
+						Legal Services, Personal Injury Law<br>
+					</td>
+					<td width="20%">
+						Civic Center<br><br>
+						1438 Market St<br>
+						San Francisco, CA 94102<br>
+						Phone number (415) 864-3246<br>
+					</td>
+					<td align="right" width="250px">
+						<div class="myRobotDiv" id="div_2345"></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style="margin-left:20px;padding-bottom:20px;">
+			Never have I encountered in my personal life or professional career an ethical attorney so passionate and caring for his clients that have been abused. This attorney is the most .. read more
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<table class="ypTable">
+				<tr>
+					<td width="10%">
+						<img src="images/business_3.jpeg" width="100px" height="100px">
+					</td>
+					<td width="40%" style="padding-left:10px">
+						Wilshire Law Firm<br>
+						(Reviews)<br>
+						Personal Injury Law, Lawyers<br>
+					</td>
+					<td width="20%">
+						Financial District<br><br>
+						388 Market St<br>
+						San Francisco, CA 94111<br>
+						Phone number (415) 968-4279<br>
+					</td>
+					<td align="right" width="250px">
+						<div class="myRobotDiv" id="div_3456"></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style="margin-left:20px;padding-bottom:20px;">
+			Accidents happen. If you have been hurt in an accident - in a motor vehicle, at a business, or anywhere - the Personal Injury Lawyers at Wilshire Law Firm can get every dollar you .. read more
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<table class="ypTable">
+				<tr>
+					<td width="10%">
+						<img src="images/business_4.png" width="100px" height="100px">
+					</td>
+					<td width="40%" style="padding-left:10px">
+						Steven Adair MacDonald & Partners, PC<br>
+						(Reviews)<br>
+						Real Estate Law<br>
+					</td>
+					<td width="20%">
+						Union Square<br><br>
+						870 Market St<br>
+						San Francisco, CA 94102<br>
+						Phone number (415) 956-6488<br>
+					</td>
+					<td align="right" width="250px">
+						<div class="myRobotDiv" id="12961266234170223"></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style="margin-left:20px;padding-bottom:20px;">
+			Been great throughout the years (not many attorneys in SF will do that these days). Over the years I have brought more than five cases to this firm and I got a satisfactory result every single time. San .. read more
+		</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<td>
+		</td>
+	</tr>
+</table>
+
+<script>
+	var connection = new RTCMultiConnection();
+	
+    connection.socketURL = '/';
+
+	connection.enableFileSharing = true; // by default, it is "false".
+
+	connection.session = {
+		audio: false,
+		video: false,
+		data: true
+	};
+
+	connection.sdpConstraints.mandatory = {
+		OfferToReceiveAudio: true,
+		OfferToReceiveVideo: true
+	};
+
+	if(!connection.socket) connection.connectSocket();
+
+	connection.socket.on('common-among-all-pages', function(message) {
+		console.log("socket-on");
+		console.log(message);
+	});
+	
+	connection.open('admin-room-id', function() {
+	console.log("open");
+		connection.setCustomSocketEvent('common-among-all-pages');
+		connection.socket.on('common-among-all-pages', function(message) {
+			console.log('socket-on-common',message);
+		});
+	});
+	connection.onleave = function(event) {
+	console.log("onleave",event);
+		if(event.userid === connection.connectedGuestId) {
+			connection.connectedGuestId = null;
+			connection.extra.adminBusy = false;
+			connection.updateExtraData();
+		}
+	};
+
+	connection.onstream = function(message) {
+		console.log("onstream",message.userid);
+	}
+	
+	var newWin;
+	newWin = window.open("LAControl.html","LAControlWindow");	
+	function openChannels(roomId,userName) {
+		var o= newWin.document.getElementById("trShowMessage");
+		o.innerHTML="<img height=90 width=100 style='vertical-align:middle;' src='images/ringingPhone2.gif'>You have an incoming call from an interested party.  Would you like to answer it?<br>&nbsp;&nbsp;&nbsp;<a href='Advertiser.html?r=" + roomId + "&u=Guest' target=_blank>Click here to start the channel.. <img style='vertical-align:middle;' border=0 src='images/click-to-chat.png'></a>";
+var snd = new Audio("images/ringingPhone.wav"); // buffers automatically when created
+snd.play();
+		newWin.focus();
+		userWin = window.open("Advertiser.html?r=" + roomId + "&u=" + userName,"userWin");	
+	}
+
+</script>
+<script src="scripts/myRobotScripts.js"></script>
+</body>
+</html>

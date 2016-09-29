@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LA Control Page</title>
+    <link href="style/style.css" rel="stylesheet">
+	<script src="//cdn.webrtc-experiment.com/RTCMultiConnection.js"> </script>
+	<script src="https://cdn.webrtc-experiment.com/rmc3.min.js"></script>
+	<script src="https://cdn.webrtc-experiment.com:443/rmc3.fbr.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<style>
+		table.menuTable td { padding: 20px; font-size:1.2em; }
+	</style>
+</head>
+<body>
+<form>
+
+<table border=0 width="98%" style="min-height:98%;">
+	<tr>
+		<td colspan=10 width="100%">
+			<table width="100%" border=0>
+				<tr>
+					<td width="70%" align="left">
+						<table border=0 align="left">
+							<tr>
+								<td>
+									<img src="images/livingads.png">
+								</td>
+								<td style="vertical-align:middle;">
+									<img src="images/mr-channel-menu.png" style="vertical-align:middle;" width="60px" height="40px"> &nbsp; &nbsp;
+								</td>
+								<td style="vertical-align:middle;">
+									<input type="text" placeholder="Find" style="height:25px;font-size:10pt;"> &nbsp;
+									<input type="text" placeholder="Novato, CA" style="height:25px;font-size:10pt;">	 &nbsp;					
+									<img src="images/ios-search.png" style="vertical-align:middle;" width="30px" height="30px">
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td align="right" style="vertical-align:middle;">
+						<table border=0 style="vertical-align:middle;">
+							<tr>
+								<td style="vertical-align:middle;">
+									Hi, <div style="display:inline" id="user"></div> (<div style="display:inline" id="room"></div>) &nbsp;
+									<img src="images/myrobot-face.png" style="vertical-align:middle;" width="50px" height="30px"> &nbsp;
+									<img src="images/help.png" width="25" height="25" style="vertical-align:middle;" width="30px" height="30px">&nbsp;Help
+						   			<div id="messages" class="messages" style="border:0px solid black;position:fixed;float:top;top:10px;right:20px;"></div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style="vertical-align:top;width:200px;height:600px;background-color:pink">
+			<table class="menuTable" style="color:white;font-family:Arial;">
+				<tr>
+					<td>
+						<font size="5em">LA Controller</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Edit Account
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Usage Statistics
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Help & FAQs
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Settings
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Log Out
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width:850px;padding:40px;border:0px solid grey;font-weight:bold;font-size:12pt;" id="trShowMessage">
+		</td>
+	</tr>
+</table>
+
+
+<script>
+
+	function getUrlVars() {
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	vars[key] = value;
+	});
+	return vars;
+	}
+
+	var user = getUrlVars()["u"];
+	if ((user=="") || (typeof user==="undefined")) user="Kitty Expert";
+	document.getElementById("user").innerText=user;
+	var room = getUrlVars()["r"];
+	if ((room=="") || (typeof room==="undefined")) room="kitty";
+	document.getElementById("room").innerText=room;
+	
+	var connection = new RTCMultiConnection();
+	
+    connection.socketURL = '/';
+
+	connection.enableFileSharing = true; // by default, it is "false".
+
+	connection.session = {
+		audio: false,
+		video: false,
+		data: true
+	};
+
+	connection.sdpConstraints.mandatory = {
+		OfferToReceiveAudio: true,
+		OfferToReceiveVideo: true
+	};
+
+	if(!connection.socket) connection.connectSocket();
+
+	connection.userid = room;
+	connection.extra.username = user;
+	
+	setTimeout(function() {
+		connection.join('admin-room-id', function() {
+			connection.socket.emit('commmon-among-all-pages', {
+				userid: connection.userid,
+				extra: connection.extra,
+				roomid: 'admin-room-id'
+			});
+		});
+		document.getElementById("trShowMessage").innerHTML = "You are now connected to YP/Yelp Advertising Page - you are LIVE!"
+	}, 2000);
+	
+	window.name = "LAControlWindow";
+</script>
+</body>
+</html>
