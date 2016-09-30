@@ -138,5 +138,7 @@ require('./Signaling-Server.js')(app, function(socket) {
                 socket.broadcast.emit(params.socketCustomEvent, message);
             } catch (e) {}
         });
-    } catch (e) {}
+    } catch (e) {
+    	console.log(e);
+    }
 });
