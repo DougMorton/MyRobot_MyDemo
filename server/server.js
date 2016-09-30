@@ -3,6 +3,7 @@
 // Documentation  - github.com/muaz-khan/RTCMultiConnection
 
 var isUseHTTPs = !(!!process.env.PORT || !!process.env.IP);
+isUseHTTPs = false;
 
 var port = process.env.PORT || 9001;
 
