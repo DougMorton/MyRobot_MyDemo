@@ -1,8 +1,8 @@
 {
-  "name": "MyRobot_MyDemo",
+  "name": "MyRobot-MyDemo",
   "version": "0.0.1",
   "private": true,
-  "main": "server/server.js",
+  "main": "../server/server.js",
   "engines": {
     "node": "4.4.5"
   },
@@ -11,8 +11,5 @@
   },
   "devDependencies": {
     "gulp-webserver": "^0.9.1"
-  },
-	"scripts": {
-		"start": "node server/server.js"
-	}
+  }
 }
