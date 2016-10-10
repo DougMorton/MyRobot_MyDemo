@@ -2,11 +2,12 @@
   "name": "MyRobot-MyDemo",
   "version": "0.0.1",
   "private": true,
-  "main": "../server/server.js",
+  "main": "server.js",
   "engines": {
     "node": "4.4.5"
   },
   "dependencies": {
+    "express": "^4.14.0",
     "ws": "^1.1.1"
   },
   "devDependencies": {
